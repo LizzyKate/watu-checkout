@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen relative">
       <div class="bg-body w-3/4 pt-12">
         <div class="flex justify-center item-center">
           <div class="flex flex-col">
@@ -103,7 +103,9 @@
           </div>
         </div>
       </div>
-      <div class="bg-white w-1/4 pt-10 px-8 flex flex-col border border-border">
+      <div
+        class="bg-white w-1/4 pt-10 px-8 flex flex-col border border-border fixed right-0"
+      >
         <div>
           <p class="text-lg text-text font-display mb-0">Pay to:</p>
         </div>
