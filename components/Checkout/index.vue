@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="flex h-screen">
+    <div class="flex min-h-screen">
       <div class="bg-body w-3/4 pt-12">
         <div class="flex justify-center item-center">
           <div class="flex flex-col">
@@ -24,7 +24,7 @@
               </div>
             </div>
             <div
-              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 pl-10 flex flex-col"
+              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 px-10 flex flex-col"
             >
               <div class="flex items-start">
                 <div class="rounded-full border border-circle w-5 h-5"></div>
@@ -42,10 +42,23 @@
                     </p>
                   </div>
                 </div>
+                <div class="flex items-center flex-grow justify-end">
+                  <div>
+                    <i class="fas fa-angle-left text-text text-base"></i>
+                  </div>
+                  <div class="ml-2">
+                    <p
+                      class="text-text text-base font-display font-medium mb-0"
+                    >
+                      Back
+                    </p>
+                  </div>
+                </div>
               </div>
+              <CreditCard />
             </div>
             <div
-              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 pl-10 flex flex-col"
+              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 px-10 flex flex-col"
             >
               <div class="flex items-start">
                 <div class="rounded-full border border-circle w-5 h-5"></div>
@@ -64,9 +77,10 @@
                   </div>
                 </div>
               </div>
+              <Bank />
             </div>
             <div
-              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 pl-10 flex flex-col"
+              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 mb-8 pl-10 flex flex-col"
             >
               <div class="flex items-start">
                 <div class="rounded-full border border-circle w-5 h-5"></div>
@@ -166,6 +180,13 @@
   </section>
 </template>
 <script>
-export default {}
+import CreditCard from './creditCard'
+import Bank from './bank'
+export default {
+  components: {
+    CreditCard,
+    Bank,
+  },
+}
 </script>
 <style scoped></style>

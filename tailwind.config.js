@@ -33,6 +33,7 @@ module.exports = {
         circle: '#8898AA',
         content: '#1B2125',
         para: '#788995',
+        save: '#2BAE12',
       },
     },
   },
