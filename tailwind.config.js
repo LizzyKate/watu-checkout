@@ -34,6 +34,7 @@ module.exports = {
         content: '#1B2125',
         para: '#788995',
         save: '#2BAE12',
+        card: '#F1F3F952',
       },
     },
   },

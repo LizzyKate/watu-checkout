@@ -71,14 +71,14 @@
       </div>
       <div class="mt-4">
         <button
-          class="rounded bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+          class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
           type="submit"
         >
           Proceed
         </button>
       </div>
     </form>
-    <div class="mt-5">
+    <div class="mt-5 hidden">
       <div>
         <p class="text-lg font-display text-text font-semibold text-center">
           Enter OTP
@@ -139,13 +139,30 @@
         </div>
         <div class="mt-4">
           <button
-            class="rounded bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+            class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
             type="submit"
           >
             Pay
           </button>
         </div>
       </form>
+    </div>
+    <div class="mt-2">
+      <div
+        class="border border-border rounded-lg bg-card flex justify-between items-center py-2 px-5"
+      >
+        <div>
+          <p class="text-text text-base">534898**********7553</p>
+        </div>
+        <div>
+          <img src="/mastercard.svg" alt="" />
+        </div>
+      </div>
+      <div class="mt-8">
+        <p class="text-base font-display text-text font-semibold text-center">
+          Use another card
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -170,12 +187,6 @@ export default {}
   font-weight: 200;
   color: white;
   margin: 0 2px;
-}
-
-.digit-group .splitter {
-  padding: 0 5px;
-  color: white;
-  font-size: 24px;
 }
 
 .prompt {

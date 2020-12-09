@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <div class="mt-5 hidden">
+    <div class="mt-8 hidden">
       <div class="w-full">
         <p class="text-text text-center font-display text-base font-semibold">
           Select Bank

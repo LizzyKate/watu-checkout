@@ -42,7 +42,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center flex-grow justify-end">
+                <div class="flex items-center flex-grow justify-end hidden">
                   <div>
                     <i class="fas fa-angle-left text-text text-base"></i>
                   </div>
@@ -80,7 +80,7 @@
               <Bank />
             </div>
             <div
-              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 mb-8 pl-10 flex flex-col"
+              class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 mb-8 px-10 flex flex-col"
             >
               <div class="flex items-start">
                 <div class="rounded-full border border-circle w-5 h-5"></div>
@@ -99,6 +99,7 @@
                   </div>
                 </div>
               </div>
+              <Watu />
             </div>
           </div>
         </div>
@@ -179,15 +180,18 @@
         </div>
       </div>
     </div>
+    <!-- generate payment -->
   </section>
 </template>
 <script>
 import CreditCard from './creditCard'
 import Bank from './bank'
+import Watu from './watu'
 export default {
   components: {
     CreditCard,
     Bank,
+    Watu,
   },
 }
 </script>
