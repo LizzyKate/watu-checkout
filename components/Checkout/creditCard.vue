@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Card Details -->
     <form class="hidden mt-2" @submit.prevent="">
       <div class="border border-border rounded flex flex-col">
         <div class="mt-2 ml-8">
@@ -13,7 +14,7 @@
               v-model="cardNumber"
               type="text"
               placeholder="0000 0000 0000 0000"
-              class="text-circle placeholder-circle pl-2 py-1 rounded text-xs focus:outline-none border border-border font-display w-full"
+              class="text-circle placeholder-circle pl-2 py-2 rounded text-xs focus:outline-none border border-border font-display w-full"
             />
           </div>
           <div class="absolute __pay">
@@ -39,14 +40,14 @@
             <input
               v-model="cardExpiry"
               type="date"
-              class="text-circle placeholder-circle pl-2 py-1 rounded text-xs focus:outline-none border border-border font-display w-full"
+              class="text-circle placeholder-circle pl-2 py-2 rounded text-xs focus:outline-none border border-border font-display w-full"
             />
           </div>
           <div class="ml-4">
             <input
               v-model="cvv"
               type="number"
-              class="text-circle placeholder-circle pl-2 py-1 rounded text-xs focus:outline-none border border-border font-display w-full"
+              class="text-circle placeholder-circle pl-2 py-2 rounded text-xs focus:outline-none border border-border font-display w-full"
             />
           </div>
         </div>
@@ -78,6 +79,7 @@
         </button>
       </div>
     </form>
+    <!-- OTP -->
     <div class="mt-5 hidden">
       <div>
         <p class="text-lg font-display text-text font-semibold text-center">
@@ -100,42 +102,12 @@
         autocomplete="off"
       >
         <div class="digit-group">
-          <input id="digit-1" type="text" name="digit-1" data-next="digit-2" />
-          <input
-            id="digit-2"
-            type="text"
-            name="digit-2"
-            data-next="digit-3"
-            data-previous="digit-1"
-          />
-          <input
-            id="digit-3"
-            type="text"
-            name="digit-3"
-            data-next="digit-4"
-            data-previous="digit-2"
-          />
-
-          <input
-            id="digit-4"
-            type="text"
-            name="digit-4"
-            data-next="digit-5"
-            data-previous="digit-3"
-          />
-          <input
-            id="digit-5"
-            type="text"
-            name="digit-5"
-            data-next="digit-6"
-            data-previous="digit-4"
-          />
-          <input
-            id="digit-6"
-            type="text"
-            name="digit-6"
-            data-previous="digit-5"
-          />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
         </div>
         <div class="mt-4">
           <button
@@ -147,6 +119,7 @@
         </div>
       </form>
     </div>
+    <!-- Saved Card -->
     <div class="mt-2">
       <div
         class="border border-border rounded-lg bg-card flex justify-between items-center py-2 px-5"
@@ -167,7 +140,15 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      cardNumber: '',
+      cardExpiry: '',
+      cvv: '',
+    }
+  },
+}
 </script>
 <style scoped>
 .__pay {
@@ -187,11 +168,5 @@ export default {}
   font-weight: 200;
   color: white;
   margin: 0 2px;
-}
-
-.prompt {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: white;
 }
 </style>

@@ -23,6 +23,7 @@
                 </p>
               </div>
             </div>
+            <!-- CreditCard -->
             <div
               class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 px-10 flex flex-col"
             >
@@ -57,6 +58,7 @@
               </div>
               <CreditCard />
             </div>
+            <!-- Bank -->
             <div
               class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 px-10 flex flex-col"
             >
@@ -79,6 +81,7 @@
               </div>
               <Bank />
             </div>
+            <!-- Watu -->
             <div
               class="mt-4 w-full bg-white rounded-lg pt-10 pb-8 mb-8 px-10 flex flex-col"
             >
@@ -180,18 +183,29 @@
         </div>
       </div>
     </div>
-    <!-- generate payment -->
+    <!-- generate payment success -->
+    <div class="h-screen bg-body flex items-center justify-center hidden">
+      <Success />
+    </div>
+    <!-- generate payment failure -->
+    <div class="h-screen bg-body flex items-center justify-center hidden">
+      <Failure />
+    </div>
   </section>
 </template>
 <script>
 import CreditCard from './creditCard'
 import Bank from './bank'
 import Watu from './watu'
+import Success from './paymentSuccess'
+import Failure from './paymentFailure'
 export default {
   components: {
     CreditCard,
     Bank,
     Watu,
+    Success,
+    Failure,
   },
 }
 </script>

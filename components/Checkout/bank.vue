@@ -1,64 +1,78 @@
 <template>
   <div class="flex flex-col">
+    <!-- Select Bank -->
     <div class="mt-8 hidden">
       <div class="w-full">
         <p class="text-text text-center font-display text-base font-semibold">
           Select Bank
         </p>
       </div>
-      <div class="mt-5 w-full relative">
-        <button
-          class="text-sm font-display look w-full focus:outline-none shadow-none border-0 cursor-pointer rounded inline-flex justify-between items-center relative"
+      <form class="mt-5 w-full">
+        <select
+          v-model="bankName"
+          name="bank"
+          class="text-sm font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
         >
-          <input
-            v-model="bank"
-            placeholder="Bank"
-            class="text-circle placeholder-circle pl-2 py-1 rounded text-xs focus:outline-none border border-border font-display w-full"
-          />
-          <svg
-            class="fill-current h-4 w-4 absolute __pay"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
+          <option value="" disabled selected>Bank</option>
+          <option
+            v-for="(bankType, i) in bank"
+            :key="i"
+            :value="bankType.bankId"
+            @click="bankName = bankType.bankid"
           >
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
-          </svg>
-        </button>
-      </div>
+            {{ bankType.bankName }}
+          </option>
+        </select>
+        <div class="mt-6 w-full">
+          <button
+            class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+            type="submit"
+          >
+            Proceed
+          </button>
+        </div>
+      </form>
     </div>
+    <!-- Select Account -->
     <div class="mt-5 hidden">
       <div class="w-full">
         <p class="text-text text-center font-display text-base font-semibold">
           Select Account
         </p>
       </div>
-      <div class="mt-5 w-full relative">
-        <button
-          class="text-sm font-display look w-full focus:outline-none shadow-none border-0 cursor-pointer rounded inline-flex justify-between items-center relative"
+      <form class="mt-5 w-full">
+        <select
+          v-model="accountName"
+          name="bank"
+          class="text-sm font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
         >
-          <input
-            v-model="bank"
-            placeholder="Account"
-            class="text-circle placeholder-circle pl-2 py-1 rounded text-xs focus:outline-none border border-border font-display w-full"
-          />
-          <svg
-            class="fill-current h-4 w-4 absolute __pay"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
+          <option value="" disabled selected>Account</option>
+          <option
+            v-for="(accountType, i) in account"
+            :key="i"
+            :value="accountType.accountId"
+            @click="accountName = accountType.accountId"
           >
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
-          </svg>
-        </button>
-      </div>
-      <div class="mt-4">
+            {{ accountType.accountName }}
+          </option>
+        </select>
+
+        <div class="mt-6 w-full">
+          <button
+            class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+            type="submit"
+          >
+            Proceed
+          </button>
+        </div>
+      </form>
+      <!-- <div class="mt-4">
         <p class="text-base font-display text-text font-semibold text-center">
           Use different account
         </p>
-      </div>
+      </div> -->
     </div>
+    <!-- Bank Code -->
     <div class="mt-3">
       <div class="w-full">
         <p
@@ -90,7 +104,7 @@
         </div>
         <div class="mt-5">
           <p class="text-base font-display text-text font-semibold text-center">
-            Choose Another Account
+            Choose Another Bank
           </p>
         </div>
       </div>
@@ -100,7 +114,24 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      bankName: '',
+      accountName: '',
+      bank: [
+        { bankName: 'Uba Bank', bankId: 'Uba Bank' },
+        { bankName: 'Fidelity Bank', bankId: 'Fidelity Bank' },
+        { bankName: 'Access Bank', bankId: 'Access Bank' },
+      ],
+
+      account: [
+        { accountName: 'Savings Account', accountId: 'Savings account' },
+        {
+          accountName: 'Fixed Deposit Account',
+          accountId: 'Fixed Deposit Account',
+        },
+        { accountName: 'Current Account', accountId: 'Current Account' },
+      ],
+    }
   },
   methods: {},
 }
