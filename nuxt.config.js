@@ -43,6 +43,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-clipboard2',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

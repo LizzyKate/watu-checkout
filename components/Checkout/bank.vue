@@ -1,17 +1,17 @@
 <template>
   <div class="flex flex-col">
     <!-- Select Bank -->
-    <div class="mt-8 hidden">
+    <div v-if="selectBank" class="mt-8">
       <div class="w-full">
         <p class="text-text text-center font-display text-base font-semibold">
           Select Bank
         </p>
       </div>
-      <form class="mt-5 w-full">
+      <form class="mt-5 w-full" @submit.prevent="getBankCode">
         <select
           v-model="bankName"
           name="bank"
-          class="text-sm font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
+          class="text-sm bg-white font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
         >
           <option value="" disabled selected>Bank</option>
           <option
@@ -25,7 +25,7 @@
         </select>
         <div class="mt-6 w-full">
           <button
-            class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+            class="rounded-lg bg-watu text-text w-full focus:outline-none py-2 font-semibold font-display text-center"
             type="submit"
           >
             Proceed
@@ -34,7 +34,7 @@
       </form>
     </div>
     <!-- Select Account -->
-    <div class="mt-5 hidden">
+    <!-- <div class="mt-5 hidden">
       <div class="w-full">
         <p class="text-text text-center font-display text-base font-semibold">
           Select Account
@@ -44,7 +44,7 @@
         <select
           v-model="accountName"
           name="bank"
-          class="text-sm font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
+          class="text-sm bg-white font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
         >
           <option value="" disabled selected>Account</option>
           <option
@@ -59,21 +59,21 @@
 
         <div class="mt-6 w-full">
           <button
-            class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+            class="rounded-lg bg-watu text-text w-full focus:outline-none py-2 font-semibold font-display text-center"
             type="submit"
           >
             Proceed
           </button>
         </div>
       </form>
-      <!-- <div class="mt-4">
+      <div class="mt-4">
         <p class="text-base font-display text-text font-semibold text-center">
           Use different account
         </p>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
     <!-- Bank Code -->
-    <div class="mt-3">
+    <div v-if="bankCode" class="mt-3">
       <div class="w-full">
         <p
           class="text-para w-3/4 mx-auto text-center text-sm font-display font-light"
@@ -82,8 +82,11 @@
         </p>
       </div>
       <div class="mt-4 w-full">
-        <p class="text-content font-display font-medium text-lg text-center">
-          *737*51*000#
+        <p
+          ref="copy"
+          class="text-content font-display font-medium text-lg text-center"
+        >
+          {{ bankDetail.bankUssd }}
         </p>
       </div>
       <div class="mt-3">
@@ -93,17 +96,25 @@
             <p class="text-sm font-display text-circle">Reference code:</p>
           </div>
           <div>
-            <p class="text-sm font-display text-content">9742</p>
+            <p class="text-sm font-display text-content">
+              {{ bankDetail.referenceCode }}
+            </p>
           </div>
         </div>
         <div class="border-t border-border w-3/4 mt-1 mx-auto"></div>
         <div class="mt-4">
-          <p class="text-sm text-text font-display text-center">
+          <p
+            class="text-sm text-text font-display text-center cursor-pointer"
+            @click="copy()"
+          >
             Click here to copy code
           </p>
         </div>
         <div class="mt-5">
-          <p class="text-base font-display text-text font-semibold text-center">
+          <p
+            class="text-base font-display text-text font-semibold text-center cursor-pointer"
+            @click="anotherBank"
+          >
             Choose Another Bank
           </p>
         </div>
@@ -131,9 +142,34 @@ export default {
         },
         { accountName: 'Current Account', accountId: 'Current Account' },
       ],
+      bankCode: false,
+      selectBank: true,
+      bankDetail: {
+        bankUssd: ' *737*51*000#',
+        referenceCode: '9742',
+      },
     }
   },
-  methods: {},
+  methods: {
+    getBankCode() {
+      this.bankCode = true
+      this.selectBank = false
+    },
+    anotherBank() {
+      this.bankCode = false
+      this.selectBank = true
+    },
+    async copy(i) {
+      try {
+        // eslint-disable-next-line unicorn/prefer-text-content
+        await this.$copyText(this.$refs.copy.innerText)
+        alert('Copied')
+      } catch (e) {
+        console.log(e)
+        alert('Could not copy')
+      }
+    },
+  },
 }
 </script>
 <style scoped>

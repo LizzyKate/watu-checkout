@@ -1,74 +1,27 @@
 <template>
   <div class="flex flex-col">
     <!-- Select Business -->
-    <!-- <div class="mt-5 w-full relative hidden">
-      <div
-        class="text-sm font-display look w-full shadow-none border-0 cursor-pointer rounded inline-flex justify-between items-center relative"
-      >
-        <input
-          v-model="business"
-          type="text"
-          placeholder="Select Business"
-          class="text-circle placeholder-circle pl-2 py-2 rounded text-xs focus:outline-none border border-border font-display w-full"
-        />
-        <svg
-          class="fill-current h-4 w-4 absolute __pay"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
-    </div> -->
-    <!-- Watu account -->
-    <form class="mt-5">
-      <!-- <div class="w-full relative">
-        <div
-          class="text-sm font-display look w-full shadow-none border-0 cursor-pointer rounded inline-flex justify-between items-center relative"
-        >
-          <input
-            v-model="bytelabs"
-            type="text"
-            placeholder="Bytelabs"
-            class="text-text placeholder-text pl-2 py-2 rounded text-xs focus:outline-none border border-border font-display w-full"
-          />
-          <svg
-            class="fill-current h-4 w-4 absolute __pay"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
-          </svg>
-        </div>
-      </div> -->
+    <form v-if="selectBusiness" class="mt-5" @submit.prevent="enterPin">
       <div class="w-full relative">
-        <div
-          class="text-sm font-display look w-full shadow-none border-0 cursor-pointer rounded inline-flex justify-between items-center relative"
+        <select
+          v-model="business"
+          name="bank"
+          class="text-sm bg-white font-display text-circle pl-2 py-2 rounded w-full focus:outline-none shadow-none border border-border font-display cursor-pointer"
         >
-          <input
-            v-model="amount"
-            type="text"
-            placeholder="Amount"
-            class="text-circle placeholder-circle pl-2 py-2 rounded text-xs focus:outline-none border border-border font-display w-full"
-          />
-          <svg
-            class="fill-current h-4 w-4 absolute __pay"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
+          <option value="" disabled selected>Select Business</option>
+          <option
+            v-for="(businessType, i) in businessName"
+            :key="i"
+            :value="businessType.businessId"
+            @click="business = businessType.businessid"
           >
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
-          </svg>
-        </div>
+            {{ businessType.name }}
+          </option>
+        </select>
       </div>
       <div class="mt-6 w-full">
         <button
-          class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+          class="rounded-lg bg-watu text-text w-full focus:outline-none py-2 font-semibold font-display text-center"
           type="submit"
         >
           Proceed
@@ -76,7 +29,7 @@
       </div>
     </form>
     <!-- Watu pin -->
-    <div class="mt-5 hidden">
+    <div v-if="pin" class="mt-5">
       <div>
         <p class="text-lg font-display text-text font-semibold text-center">
           Watu Pin
@@ -95,24 +48,28 @@
         class="text-center mt-5"
         data-group-name="digits"
         data-autosubmit="false"
-        autocomplete="off"
+        autocomplete="on"
+        @submit.prevent="submitPayment"
       >
         <div class="digit-group">
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" />
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" />
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" />
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" />
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" />
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" />
         </div>
         <div class="mt-6">
-          <p class="text-base font-display text-text font-semibold text-center">
+          <p
+            class="text-base font-display text-text font-semibold text-center cursor-pointer"
+            @click="cancelPayment"
+          >
             Cancel Payment
           </p>
         </div>
         <div class="mt-5">
           <button
-            class="rounded-lg bg-watu text-text w-full focus;outline-none py-2 font-semibold font-display text-center"
+            class="rounded-lg bg-watu text-text w-full focus:outline-none py-2 font-semibold font-display text-center"
             type="submit"
           >
             Pay
@@ -131,8 +88,28 @@
 export default {
   data() {
     return {
-      amount: '',
+      business: '',
+      businessName: [
+        { name: 'Bytelabs ', businessId: 'Bytelabs ' },
+        { name: 'Self Employed', businessId: 'Self Employed' },
+        { name: 'Partnership', businessId: 'Partnership ' },
+      ],
+      pin: false,
+      selectBusiness: true,
     }
+  },
+  methods: {
+    enterPin() {
+      this.pin = true
+      this.selectBusiness = false
+    },
+    cancelPayment() {
+      this.pin = false
+      this.selectBusiness = true
+    },
+    submitPayment() {
+      this.$router.push('/paymentFailure')
+    },
   },
 }
 </script>
