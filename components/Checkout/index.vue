@@ -43,7 +43,11 @@
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center flex-grow justify-end hidden">
+                <div
+                  v-if="backward"
+                  class="flex items-center flex-grow justify-end cursor-pointer"
+                  @click="goBack()"
+                >
                   <div>
                     <i class="fas fa-angle-left text-text text-base"></i>
                   </div>
@@ -184,28 +188,49 @@
       </div>
     </div>
     <!-- generate payment success -->
-    <div class="h-screen bg-body flex items-center justify-center hidden">
+    <!-- <div v-if="paid" class="h-screen bg-body flex items-center justify-center">
       <Success />
-    </div>
+    </div> -->
     <!-- generate payment failure -->
-    <div class="h-screen bg-body flex items-center justify-center hidden">
+    <!-- <div class="h-screen bg-body flex items-center justify-center hidden">
       <Failure />
-    </div>
+    </div> -->
   </section>
 </template>
 <script>
 import CreditCard from './creditCard'
 import Bank from './bank'
 import Watu from './watu'
-import Success from './paymentSuccess'
-import Failure from './paymentFailure'
+// import Success from './paymentSuccess'
+// import Failure from './paymentFailure'
 export default {
   components: {
     CreditCard,
     Bank,
     Watu,
-    Success,
-    Failure,
+    // Success,
+    // Failure,
+  },
+  data() {
+    return {}
+  },
+  computed: {
+    backward() {
+      return this.$store.state.checkout.back
+    },
+    // paid() {
+    //   return this.$store.state.checkout.success
+    // },
+    // details() {
+    //   return this.$store.state.checkout.details
+    // },
+  },
+  methods: {
+    goBack() {
+      this.$store.commit('checkout/getOtp', false)
+      this.$store.commit('checkout/goBack', false)
+      this.$store.commit('checkout/hideCardDetail', true)
+    },
   },
 }
 </script>
